@@ -19,7 +19,7 @@ const getMobileList = async (filter, options) => {
   const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
 
   // return Mobile.find(filter).skip(skip).limit(options.limit).select("-password");
-  return Mobile.find({$or : [{"director_name" : "Vikram Kumar"}]})
+  return Mobile.find()
 };
 
 /**
@@ -54,11 +54,20 @@ const getMobileByName = async (mobile_name) => {
   return Mobile.findOne({ mobile_name });
 };
 
+/** update status */
+const updateMobileStatus = async(mobileId,mobileStatus) => {
+  if(mobileStatus){
+      return Mobile.findByIdAndUpdate(mobileId,{$set: {is_active:false}});
+  }
+  return Mobile.findByIdAndUpdate(mobileId,{$set: {is_active:true}});
+}
+
 module.exports = {
   createMobile,
   getMobileList,
   deleteMobile,
   getMobileById,
   updateDetails,
-  getMobileByName
+  getMobileByName,
+  updateMobileStatus
 };

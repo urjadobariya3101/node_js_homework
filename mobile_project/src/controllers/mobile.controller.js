@@ -80,7 +80,7 @@ const updateDetails = async (req, res) => {
             .status(200)
             .json({ success: true, message: "Mobile details update successfully!" });
     } catch (error) {
-        res.status(400).json({ success: false, message: error, message });
+        res.status(400).json({ success: false, message: error.message });
     }
 };
 
@@ -104,10 +104,34 @@ const getMobileDetails = async (req, res) => {
     }
   };
 
+  /** update mobile status */
+const updateMobileStatus = async(req,res) => {
+    try {
+        const mobileId = req.params.MobileId;
+        const MobileExist = await mobileService.getMobileById(mobileId);
+        if(!MobileExist){
+            throw new Error("Mobile not found..");
+        }
+        const MobileDetail = await mobileService.getmobilestatus(mobileId);
+        const MobileStatus = MobileDetail.is_active;
+        await mobileService.updateMobileStatus(mobileId,MobileStatus);
+        res.status(200).json({
+            success:true,
+            message: "Mobile updated successfully..",
+        });
+    } catch (error) {
+        res.status(400).json({
+            success:false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     createMobile,
     getMobileList,
     deleteMobile,
     updateDetails,
-    getMobileDetails
+    getMobileDetails,
+    updateMobileStatus
 }
