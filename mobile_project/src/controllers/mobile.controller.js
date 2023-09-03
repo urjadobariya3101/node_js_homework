@@ -74,16 +74,15 @@ const updateDetails = async (req, res) => {
             throw new Error("Mobile not found...");
         }
 
-        await mobileService.updateDetails(mobileId, req.body);
+        const updatedData=await mobileService.updateDetails(mobileId, req.body);
 
         res
             .status(200)
-            .json({ success: true, message: "Mobile details update successfully!" });
+            .json({ success: true, message: "Mobile details update successfully!", resData:updatedData });
     } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+        res.status(400).json({ success: false, message: error, message });
     }
 };
-
 /** Get Mobile details by id */
 const getMobileDetails = async (req, res) => {
     try {
@@ -103,29 +102,6 @@ const getMobileDetails = async (req, res) => {
       res.status(400).json({ success: false, message: error.message });
     }
   };
-
-  /** update mobile status */
-const updateMobileStatus = async(req,res) => {
-    try {
-        const mobileId = req.params.MobileId;
-        const MobileExist = await mobileService.getMobileById(mobileId);
-        if(!MobileExist){
-            throw new Error("Mobile not found..");
-        }
-        const MobileDetail = await mobileService.getmobilestatus(mobileId);
-        const MobileStatus = MobileDetail.is_active;
-        await mobileService.updateMobileStatus(mobileId,MobileStatus);
-        res.status(200).json({
-            success:true,
-            message: "Mobile updated successfully..",
-        });
-    } catch (error) {
-        res.status(400).json({
-            success:false,
-            message: error.message
-        });
-    }
-};
 
 module.exports = {
     createMobile,

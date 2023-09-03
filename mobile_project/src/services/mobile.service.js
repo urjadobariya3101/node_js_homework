@@ -47,20 +47,20 @@ const deleteMobile = async (mobileId) => {
  * @returns {Promise<Mobile>}
  */
 const updateDetails = async (mobileId, updateBody) => {
-  return Mobile.findByIdAndUpdate(mobileId, {$set : {updateBody}})
+  const mobileDetails=await getMobileById(mobileId);
+  if(mobileDetails.is_active){
+    updateBody.is_active =false
+  }
+  else{
+    updateBody.is_active =true
+  }
+
+  return await Mobile.findByIdAndUpdate(mobileId, {$set : updateBody})
 };
 
 const getMobileByName = async (mobile_name) => {
   return Mobile.findOne({ mobile_name });
 };
-
-/** update status */
-const updateMobileStatus = async(mobileId,mobileStatus) => {
-  if(mobileStatus){
-      return Mobile.findByIdAndUpdate(mobileId,{$set: {is_active:false}});
-  }
-  return Mobile.findByIdAndUpdate(mobileId,{$set: {is_active:true}});
-}
 
 module.exports = {
   createMobile,
@@ -68,6 +68,5 @@ module.exports = {
   deleteMobile,
   getMobileById,
   updateDetails,
-  getMobileByName,
-  updateMobileStatus
+  getMobileByName
 };
