@@ -109,5 +109,4 @@ module.exports = {
     deleteMobile,
     updateDetails,
     getMobileDetails,
-    updateMobileStatus
 }

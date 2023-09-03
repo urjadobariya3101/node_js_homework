@@ -47,15 +47,15 @@ const deleteMobile = async (mobileId) => {
  * @returns {Promise<Mobile>}
  */
 const updateDetails = async (mobileId, updateBody) => {
-  const mobileDetails=await getMobileById(mobileId);
-  if(mobileDetails.is_active){
-    updateBody.is_active =false
+  const mobileDetails = await getMobileById(mobileId);
+  if (mobileDetails.is_active) {
+    updateBody.is_active = false
   }
-  else{
-    updateBody.is_active =true
+  else {
+    updateBody.is_active = true
   }
 
-  return await Mobile.findByIdAndUpdate(mobileId, {$set : updateBody})
+  return await Mobile.findByIdAndUpdate(mobileId, { $set: updateBody })
 };
 
 const getMobileByName = async (mobile_name) => {
