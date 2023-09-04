@@ -33,11 +33,4 @@ router.put(
   mobileController.updateDetails
 )
 
-/** update mobile status */
-router.put(
-  "/update-mobile-state/:mobileId",
-  mobileController.updateMobileStatus
-)
-
-
 module.exports = router;
