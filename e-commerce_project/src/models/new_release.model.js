@@ -20,7 +20,7 @@ const new_releaseSchema = new mongoose.Schema(
         }
     },
     {
-        trimstamp : true,
+        timestamps : true,
         versionKey : false,
     }
 );
