@@ -15,8 +15,8 @@ const createMobile = async (reqBody) => {
  * @param {object} options
  * @returns {Promise<Mobile>}
  */
-const getMobileList = async (filter, options) => {
-  const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
+const getMobileList = async () => {
+  // const skip = (Number(options.page || 1) - 1) * Number(options.limit || 10);
 
   // return Mobile.find(filter).skip(skip).limit(options.limit).select("-password");
   return Mobile.find()
