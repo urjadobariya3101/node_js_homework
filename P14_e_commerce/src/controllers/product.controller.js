@@ -1,113 +1,213 @@
-const { productService } = require('../services');
+const fs = require("fs");
+const { productService } = require("../services");
 
-/** create product */
+/** Create product */
 const createProduct = async (req, res) => {
-    try {
-        const reqBody = req.body;
+  try {
+    const reqBody = req.body;
 
-        const product = await productService.createProduct(reqBody);
-        if (!product) {
-            throw new Error("Something went wrong, please try again or later!");
-        }
-
-        res.status(200).json({
-            success: true,
-            message: "Product create successfully!",
-            data: { product }
-        });
-    } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+    if (req.file) {
+      reqBody.product_image = req.file.filename;
+    } else {
+      throw new Error("Product image is required!");
     }
+
+    const createdProduct = await productService.createProduct(reqBody);
+
+    res.status(200).json({
+      success: true,
+      message: "Product create successfully!",
+      data: createdProduct,
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
 };
 
-/** Get product list */
+/** Get product details */
+const getDetails = async (req, res) => {
+  try {
+    const productExists = await productService.getProductById(
+      req.params.productId
+    );
+    if (!productExists) {
+      throw new Error("Product not found!");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product details get successfully!",
+      data: productExists,
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
+};
+
+/** Get details using aggrgation */
+// const getDetailsByAggegation = async (req, res) => {
+//   try {
+//     const productDetails = await productService.getProductDetails(
+//       req.params.productId
+//     );
+//     if (!productDetails.length) {
+//       throw new Error("Product not found!");
+//     }
+
+//     res.status(200).json({
+//       success: true,
+//       message: "Product details get successfully!",
+//       data: productDetails[0],
+//     });
+//   } catch (error) {
+//     res.status(error?.statusCode || 400).json({
+//       success: false,
+//       message:
+//         error?.message || "Something went wrong, please try again or later!",
+//     });
+//   }
+// };
+
+/** Get prooduct list */
 const getProductList = async (req, res) => {
-    try {
-        const { search, ...options } = req.query;
-        let filter = {};
+  try {
+    const { search, ...options } = req.query;
+    let filter = {};
 
-        if (search) {
-            filter.$or = [
-                { first_name: { $regex: search, $options: "i" } },
-                { last_name: { $regex: search, $options: "i" } }
-            ];
+    if (search) {
+      filter.product_name = { $regex: search, $options: "i" };
+    }
+
+    const getList = await productService.getProductList(filter, options);
+
+    res.status(200).json({
+      success: true,
+      data: getList,
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
+};
+
+/** Update product details */
+const updateProduct = async (req, res) => {
+  try {
+    const reqBody = req.body;
+    const productId = req.params.productId;
+    const productExists = await productService.getProductById(productId);
+    if (!productExists) {
+      throw new Error("Product not found!");
+    }
+
+    if (req.file) {
+      reqBody.product_image = req.file.filename;
+    }
+
+    const updatedProduct = await productService.updateProduct(
+      productId,
+      reqBody
+    );
+    if (updatedProduct) {
+      if (req.file) {
+        const filePath = `./public/product_images/${productExists.product_image}`;
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
         }
-
-        const getList = await productService.getProductList(filter, options);
-
-        res.status(200).json({
-            success: true,
-            message: "Get product list successfully!",
-            data: getList,
-        });
+      }
+    } else {
+      throw new Error("Something went wrong, please try again or later!");
     }
-    catch (error) {
-        res.status(400).json({ success: false, message: error.message });
-    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product details update successfully!",
+      data: updatedProduct,
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
+};
+
+/** Manage product status */
+const manageProductStatus = async (req, res) => {
+  try {
+    const manageStatus = await productService.manageProductStatus(
+      req.params.productId
+    );
+
+    let resMessage = manageStatus.is_active
+      ? "Product can enable to sale."
+      : "Product can not enable to sale";
+
+    res.status(200).json({
+      success: true,
+      message: resMessage,
+      data: manageStatus,
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
 };
 
 /** Delete product */
 const deleteProduct = async (req, res) => {
-    try {
-        const productId = req.params.productId;
-        const productExists = await productService.getProductById(productId);
-        if (!productExists) {
-            throw new Error("Product not found!");
-        }
-
-        await productService.deleteProduct(productId);
-        res.status(200).json({
-            success: true,
-            message: "Product delete successfully!",
-        });
-    } catch (error) {
-        res.status(400).json({ success: false, message: error.message });
+  try {
+    const productId = req.params.productId;
+    const productExists = await productService.getProductById(productId);
+    if (!productExists) {
+      throw new Error("Product not found!");
     }
-};
 
-/**product update by id */
-const updateDetails = async (req, res) => {
-    try {
-        const productId = req.params.productId;
-        const productExists = await productService.getProductById(productId);
-        if (!productExists) {
-            throw new Error("Product not found...");
-        }
-
-        await productService.updateDetails(productId, req.body);
-
-        res
-            .status(200)
-            .json({ success: true, message: "Product details update successfully!" });
-    } catch (error) {
-        res.status(400).json({ success: false, message: error, message });
-    }
-};
-
-/** Get Product details by id */
-const getProductDetails = async (req, res) => {
-    try {
-      const getDetails = await productService.getProductById(
-        req.params.productId
-      );
-      if (!getDetails) {
-        throw new Error("Product not found!");
+    const deletedProduct = await productService.deleteProduct(productId);
+    if (deletedProduct) {
+      const filePath = `./public/product_images/${productExists.product_image}`;
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
       }
-
-      res.status(200).json({
-        success: true,
-        message: "Product details get successfully!",
-        data: getDetails,
-      });
-    } catch (error) {
-      res.status(400).json({ success: false, message: error.message });
+    } else {
+      throw new Error("Something went wrong, please try again or later!");
     }
-  };
+
+    res.status(200).json({
+      success: true,
+      message: "Product delete successfully!",
+      data: deletedProduct,
+    });
+  } catch (error) {
+    res.status(error?.statusCode || 400).json({
+      success: false,
+      message:
+        error?.message || "Something went wrong, please try again or later!",
+    });
+  }
+};
 
 module.exports = {
-    createProduct,
-    getProductList,
-    deleteProduct,
-    updateDetails,
-    getProductDetails
-}
+  createProduct,
+  getDetails,
+  // getDetailsByAggegation,
+  getProductList,
+  updateProduct,
+  manageProductStatus,
+  deleteProduct,
+};

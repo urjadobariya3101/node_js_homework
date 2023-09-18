@@ -1,9 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+// const cors = require("cors");
 const http = require("http");
 const { connectDB } = require("./db/dbConnection");
 const routes = require("./routes/v1");
+const path = require("path")
 // require("./helpers/crons");
 const config = require("../src/config/config");
 
@@ -21,10 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
  * parse application/json
  */
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname,`./public`)))
 
 /** enable cors */
-app.use(cors());
-app.options("*", cors());
+// app.use(cors());
+// app.options("*", cors());
 
 /** upload image */
 // app.use(express.static(`./public`));
@@ -43,5 +45,5 @@ connectDB()
 const server = http.createServer(app);
 
 server.listen(config.port, () => {
-  console.log("server listning port number "+config.port);
+  console.log("server listning port number " + config.port);
 });

@@ -10,11 +10,7 @@ const productSchema = new mongoose.Schema (
             type : String,
             trim : true
         },
-        price : {
-            type : Number,
-            trim :true
-        },
-        sub_child_category : {
+        subChildCategory : {
             type : mongoose.Types.ObjectId,
             ref : "sub-child-category",
         },

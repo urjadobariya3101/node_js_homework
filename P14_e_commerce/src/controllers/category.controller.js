@@ -32,10 +32,7 @@ const getCategoryList = async (req, res) => {
         let filter = {};
 
         if (search) {
-            filter.$or = [
-                { first_name: { $regex: search, $options: "i" } },
-                { last_name: { $regex: search, $options: "i" } }
-            ];
+            filter.$or = [];
         }
 
         const getList = await categoryService.getCategoryList(filter, options);

@@ -4,8 +4,7 @@ const Joi = require('joi');
 const createCategory = {
     body : Joi.object().keys({
         category_name : Joi.string().required().trim(),
-        category_desc : Joi.string().required().trim(),
-        price : Joi.number().integer().required()
+        category_desc : Joi.string().required().trim()
     }),
 };
 
@@ -27,7 +26,7 @@ const updateDetails = {
         categoryId : Joi.string().required().trim(),
     }),
     body : Joi.object().keys({
-        category_name : Joi.string().required().trim(),
+        sub_category_name : Joi.string().required().trim(),
         category_desc : Joi.string().required().trim(),
         price : Joi.number().integer().required()
     }),

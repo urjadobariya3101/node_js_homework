@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const subCategorySchema = new mongoose.Schema(
     {
-        category_name : {
+        sub_category_name : {
             type : String,
             trim : true
         },

@@ -11,7 +11,7 @@ const createCart = {
 
 /**get cart list */
 const getCartList = {
-    body: Joi.object().keys()
+    query: Joi.object().keys()
 };
 
 /**get cart details by id */
@@ -26,7 +26,7 @@ const updateDetails = {
     params: Joi.object().keys({
         cartId: Joi.string().required().trim()
     }),
-        body: Joi.object().keys({
+    body: Joi.object().keys({
         product: Joi.string().required().trim(),
         user: Joi.string().required().trim(),
         order: Joi.string().required().trim()

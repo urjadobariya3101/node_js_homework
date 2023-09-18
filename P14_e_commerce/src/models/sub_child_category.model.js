@@ -2,25 +2,29 @@ const mongoose = require('mongoose');
 
 const subChildCategorySchema = new mongoose.Schema(
     {
-        brand_name : {
-        type : String,
-        trim : true
+        brand_name: {
+            type: String,
+            trim: true
         },
-        sub_category : {
+        subCategory: {
+            type: mongoose.Types.ObjectId,
+            ref: "sub-category"
+        },
+        category : {
             type : mongoose.Types.ObjectId,
-            ref : "sub-category"
+            ref : "category"
         },
-        is_active : {
-            type : Boolean,
-            default : true
+        is_active: {
+            type: Boolean,
+            default: true
         }
     },
     {
-        timestamps : true,
-        versionKey : false
+        timestamps: true,
+        versionKey: false
     }
 );
 
-const SubChildCategory = mongoose.model('sub-child-category',subChildCategorySchema);
+const SubChildCategory = mongoose.model('sub-child-category', subChildCategorySchema);
 
 module.exports = SubChildCategory;

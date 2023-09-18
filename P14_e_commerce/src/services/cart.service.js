@@ -6,8 +6,11 @@ const createCart = async (reqBody) => {
 };
 
 /**get cart list */
-const GetCartList = async () => {
-    return Cart.find();
+const getCartList = async () => {
+    return Cart.find()
+    .populate('product',{product_name : 1})
+    .populate('user')
+    .populate('order',{price : 1});
 };
 
 /**get cart details by id */
@@ -27,7 +30,7 @@ const deleteCart = async (cartId) => {
 
 module.exports = {
     createCart,
-    GetCartList,
+    getCartList,
     getCartListById,
     updateDetails,
     deleteCart

@@ -29,10 +29,10 @@ router.delete(
 );
 
 /**update product */
-router.put(
-    "update-product/:productId",
-    validate(productValidation.updateDetails),
-    productController.updateDetails
-);
+// router.put(
+//     "update-product/:productId",
+//     validate(productValidation.updateDetails),
+//     productController.updateDetails
+// );
 
 module.exports = router;

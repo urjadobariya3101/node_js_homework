@@ -1,5 +1,4 @@
 const { SubChildCategory } = require('../models');
-const { subscribe } = require('../routes/v1/sub_child_category.route');
 
 /**create sub child category */
 const createSubChildCategory = async (reqBody) => {
@@ -8,7 +7,9 @@ const createSubChildCategory = async (reqBody) => {
 
 /**get sub child category list */
 const getSubChildCategoryList = async () => {
-    return SubChildCategory.find();
+    return SubChildCategory.find()
+    .populate('subCategory',{sub_category_name : 1})
+    .populate('category',{category_name : 1});
 };
 
 /**get sub child category by id */
