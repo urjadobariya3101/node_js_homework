@@ -6,3 +6,4 @@ module.exports.subCategoryService = require('./sub_category.service');
 module.exports.subChildCategoryService = require('./sub_child_category.service');
 module.exports.userService = require('./user.service');
 module.exports.bannerService = require('./banner.service');
+module.exports.emailService = require('./email.service');

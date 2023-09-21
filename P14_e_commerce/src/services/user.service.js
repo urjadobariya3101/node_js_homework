@@ -25,10 +25,16 @@ const deleteUser = async (userId) => {
     return User.findByIdAndDelete(userId);
 };
 
+/**get user by email */
+const getUserByEmail = async (email) => {
+    return User.findOne({ email });
+  };
+
 module.exports = {
     createUser,
     getUserList,
     getUserById,
     updateDetails,
-    deleteUser
+    deleteUser,
+    getUserByEmail
 };
