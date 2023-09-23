@@ -1,0 +1,1 @@
+module.exports.founderValidation = require('./founder.validation');

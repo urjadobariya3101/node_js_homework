@@ -1,0 +1,1 @@
+module.exports.founderController = require("./founder.controller")

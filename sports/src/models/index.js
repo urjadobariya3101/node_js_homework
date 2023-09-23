@@ -1,0 +1,1 @@
+module.exports.Founder   = require('./founder.model');
