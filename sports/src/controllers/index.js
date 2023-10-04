@@ -1,1 +1,6 @@
 module.exports.founderController = require("./founder.controller")
+module.exports.contactController = require("./contact.controller")
+module.exports.categoryController = require("./category.controller")
+module.exports.teamController = require("./team.controller")
+module.exports.newsController = require("./news.controller")
+module.exports.eventController = require("./event.controller")

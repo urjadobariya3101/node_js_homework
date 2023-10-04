@@ -1,5 +1,6 @@
 const { founderService } = require('../services');
-const { emailService } = require('../services')
+const { emailService } = require('../services');
+
 /**create founder */
 const createFounder = async (req,res) => {
     try {
@@ -50,7 +51,7 @@ const getFounderList = async (req,res) => {
 };
 
 /**Delete founder */
-const deleteFounder = async (req,res) => {
+const deleteDetails = async (req,res) => {
     try {
         const founderId = req.params.founderId;
         const founderExists = await founderService.getFounderById(founderId);
@@ -58,7 +59,7 @@ const deleteFounder = async (req,res) => {
             throw new Error ('Founder not found!');
         }
 
-        await founderService.deleteFounder(founderId);
+        await founderService.deleteDetails(founderId);
         res.status(200).json({
             success : true,
             message : "Founder delete successfully!!"
@@ -76,7 +77,7 @@ const updateDetails = async (req,res) => {
     try {
         const founderId = req.params.founderId;
         const founderExists = await founderService.getFounderById(founderId);
-        if(!founder) {
+        if(!founderExists) {
             throw new Error ('Founder not found!!');
         }
         await founderService.updateDetails(founderId,req.body);
@@ -138,7 +139,7 @@ const sendMail = async (req, res) => {
 module.exports = {
     createFounder,
     getFounderList,
-    deleteFounder,
+    deleteDetails,
     updateDetails,
     getFounderDetails,
     sendMail

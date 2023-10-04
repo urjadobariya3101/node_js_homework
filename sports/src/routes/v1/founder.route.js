@@ -21,14 +21,14 @@ router.get(
 );
 
 /**update data by id */
-router.update(
+router.put(
     "/update-founder/:founderId",
     validate(founderValidation.updateDetails),
     founderController.updateDetails
 );
 
 /**delete founder */
-router.update(
+router.delete(
     "/delete-founder/:founderId",
     validate(founderValidation.getDetails),
     founderController.deleteDetails

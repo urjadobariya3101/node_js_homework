@@ -1,13 +1,13 @@
 const Joi = require('joi');
 
-/**create user */
+/**create founder */
 const createFounder = {
     body : Joi.object().keys({
         firstname : Joi.string().required().trim(),
         email : Joi.string().required().trim(),
         nationality : Joi.string().required().trim(),
         sport : Joi.string().required().trim(),
-        founded_year : Joi.number().integer().required().trim()
+        founded_year : Joi.number().integer().required()
     })
 };
 
@@ -42,7 +42,7 @@ const sendMail = {
         email : Joi.string().required().trim().email(),
         subject : Joi.string().required().trim(),
         text : Joi.string().required().trim(),
-        founded_year : Joi.number().integer().required().trim()
+        founded_year : Joi.number().integer().required()
     }),
 };
 

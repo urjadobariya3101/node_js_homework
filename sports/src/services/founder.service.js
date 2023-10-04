@@ -20,7 +20,7 @@ const updateDetails = async (founderId) => {
     return Founder.findByIdAndUpdate(founderId);
 }
 
-/**delete founder */
+/**d oelete founder */
 const deleteDetails = async (founderId) => {
     return Founder.findByIdAndDelete(founderId)
 }

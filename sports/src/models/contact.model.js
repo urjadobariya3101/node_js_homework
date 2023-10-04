@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const founderSchema = new mongoose.Schema(
+const contactSchema = new mongoose.Schema(
     {
-        firstname: {
+        name: {
             type: String,
             trim: true
         },
@@ -10,22 +10,14 @@ const founderSchema = new mongoose.Schema(
             type: String,
             trim: true
         },
-        nationality: {
+        message: {
             type: String,
             trim: true
-        },
-        sport: {
-            type: String,
-            trim: true
-        },
-        founded_year : {
-            type : Number,
-            trim : true
         },
         is_active: {
             type: Boolean,
             default: true
-        }
+        },
     },
     {
         timestamps: true,
@@ -33,6 +25,6 @@ const founderSchema = new mongoose.Schema(
     }
 );
 
-const Founder = mongoose.model('founder', founderSchema);
+const Contact = mongoose.model('contact', contactSchema);
 
-module.exports = Founder;
+module.exports = Contact;
