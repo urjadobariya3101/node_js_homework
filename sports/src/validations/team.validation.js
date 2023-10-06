@@ -22,9 +22,9 @@ const getDetails = {
 /**update Team details */
 const updateDetails = {
     params : Joi.object().keys({
-        params : Joi.string().required().trim()
+        teamId : Joi.string().required().trim()
     }),
-    body : Joi.string().required().trim({
+    body : Joi.object().keys({
         team_name : Joi.string().required().trim()
     })
 };

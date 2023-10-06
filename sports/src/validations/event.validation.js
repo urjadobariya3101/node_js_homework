@@ -17,16 +17,16 @@ const getEventList = {
 /**get Event list by id */
 const getDetails = {
   params: Joi.object().keys({
-    EventId: Joi.string().required().trim(),
+    eventId: Joi.string().required().trim(),
   }),
 };
 
 /**update Event details */
 const updateDetails = {
   params: Joi.object().keys({
-    params: Joi.string().required().trim(),
+    eventId: Joi.string().required().trim(),
   }),
-  body: Joi.string().required().trim({
+  body: Joi.object().keys({
     event_name: Joi.string().required().trim(),
     event_desc: Joi.string().required().trim(),
     duration: Joi.string().required().trim(),

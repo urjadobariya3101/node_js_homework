@@ -23,9 +23,9 @@ const getDetails = {
 /**update category details */
 const updateDetails = {
     params : Joi.object().keys({
-        params : Joi.string().required().trim()
+        categoryId : Joi.string().required().trim()
     }),
-    body : Joi.string().required().trim({
+    body : Joi.object().keys({
         category_name : Joi.string().required().trim(),
         category_desc : Joi.string().required().trim()
     })

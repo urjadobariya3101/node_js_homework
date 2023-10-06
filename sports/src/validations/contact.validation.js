@@ -24,9 +24,9 @@ const getDetails = {
 /**update contact details */
 const updateDetails = {
   params: Joi.object().keys({
-    params: Joi.string().required().trim(),
+    contactId: Joi.string().required().trim(),
   }),
-  body: Joi.string().required().trim({
+  body: Joi.object().keys({
     name: Joi.string().required().trim(),
     email: Joi.string().required().trim(),
     message: Joi.string().required().trim(),

@@ -23,9 +23,9 @@ const getDetails = {
 /**update News details */
 const updateDetails = {
     params : Joi.object().keys({
-        params : Joi.string().required().trim()
+        newsId : Joi.string().required().trim()
     }),
-    body : Joi.string().required().trim({
+    body : Joi.object().keys({
         news_name : Joi.string().required().trim(),
         news_desc : Joi.string().required().trim()
     })
