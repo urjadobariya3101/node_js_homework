@@ -7,7 +7,7 @@ const createCategory = async(reqBody) => {
 
 /**list category */
 const getCategoryList = async() => {
-    return Category.find();
+    return Category.find().populate("sports");
 };
 
 /**get details category */

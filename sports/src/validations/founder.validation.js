@@ -7,7 +7,8 @@ const createFounder = {
         email : Joi.string().required().trim(),
         nationality : Joi.string().required().trim(),
         sport : Joi.string().required().trim(),
-        founded_year : Joi.number().integer().required()
+        founded_year : Joi.number().integer(),
+        sports : Joi.string().required().trim()
     })
 };
 
@@ -42,7 +43,7 @@ const sendMail = {
         email : Joi.string().required().trim().email(),
         subject : Joi.string().required().trim(),
         text : Joi.string().required().trim(),
-        founded_year : Joi.number().integer().required()
+        // founded_year : Joi.number().integer().required()
     }),
 };
 

@@ -4,7 +4,9 @@ const Joi = require('joi');
 const createResult = {
     body : Joi.object().keys({
         teamName : Joi.string().required().trim(),
-        winningDate : Joi.string().required().trim()
+        winningDate : Joi.string().required().trim(),
+        sports : Joi.string().required().trim(),
+        event_ : Joi.string().required().trim()
     })
 };
 

@@ -6,3 +6,5 @@ module.exports.newsValidation = require('./news.validation');
 module.exports.eventValidation = require('./event.validation');
 module.exports.resultValidation = require('./result.validation');
 module.exports.playerValidation = require('./player.validation');
+module.exports.sportsValidation = require('./sports.validation');
+module.exports.tokenValidation = require('./token.validation');

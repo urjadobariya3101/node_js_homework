@@ -1,4 +1,4 @@
-const { plyaerService } = require('../services');
+const { playerService } = require('../services');
 
 /**create player */
 const createPlayer = async (req,res) => {
@@ -10,7 +10,7 @@ const createPlayer = async (req,res) => {
             throw new Error ("Something went wrong, Please try again or later!");
         }
 
-        re.status(200).json({
+        res.status(200).json({
             success : true,
             message : "Player create successfully!",
             data : { player }
@@ -52,7 +52,7 @@ const getPlayerList = async(req,res) => {
 const deleteDetails = async (req,res) => {
     try {
         const playerId = req.params.playerId;
-        const playerExists = await playerService.getPlayerById(playerId);
+        const playerExists = await playerService.getPlayerListById(playerId);
         if(!playerExists) {
             throw new Error ("Player not found!");
         }
@@ -74,7 +74,7 @@ const deleteDetails = async (req,res) => {
 const updateDetails = async (req,res) => {
     try {
         const playerId = req.params.playerId;
-        const playerExists = await playerService.getPlayerById(playerId);
+        const playerExists = await playerService.getPlayerListById(playerId);
         if(!playerExists) {
             throw new Error ('Player not found!');
         }
@@ -96,7 +96,7 @@ const updateDetails = async (req,res) => {
 /**get player details by id */
 const getPlayerDetails = async (req,res) => {
     try {
-        const getDetails = await playerService.getPlayerById(req.params.playerId);
+        const getDetails = await playerService.getPlayerListById(req.params.playerId);
         if(!getDetails) {
             throw new Error ("Player not found");
         }

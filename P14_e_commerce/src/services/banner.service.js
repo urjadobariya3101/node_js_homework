@@ -19,7 +19,7 @@ const getBannerById = async (productId) => {
  * @returns {Promise<Product>}
  */
 const getList = async () => {
-  return Banner.find().populate("product")
+  return Banner.find().populate("product");
 };
 
 /**
@@ -67,20 +67,16 @@ const manageBannerStatus = async (productId) => {
   );
 };
 
-/**
- * Delete product
- * @param {ObjectId} productId
- * @returns {Promise<Product>}
- */
+/*Delete product*/
 const deleteBanner = async (productId) => {
   return Banner.findOneAndDelete({ _id: productId });
 };
 
 module.exports = {
-    getBannerById,
-    getList,
-    createBanner,
-    updateBanner,
-    manageBannerStatus,
-    deleteBanner,
+  getBannerById,
+  getList,
+  createBanner,
+  updateBanner,
+  manageBannerStatus,
+  deleteBanner,
 };

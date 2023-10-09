@@ -6,6 +6,7 @@ const createContact = {
     name: Joi.string().required().trim(),
     email: Joi.string().required().trim(),
     message: Joi.string().required().trim(),
+    sports : Joi.string().required().trim()
   }),
 };
 

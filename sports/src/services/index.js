@@ -7,3 +7,5 @@ module.exports.newsService = require('./news.service');
 module.exports.eventService = require('./event.service');
 module.exports.resultService = require('./result.service');
 module.exports.playerService = require('./player.service');
+module.exports.sportsService = require('./sports.service');
+module.exports.tokenService = require('./token.service');

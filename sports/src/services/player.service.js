@@ -7,7 +7,7 @@ const createPlayer = async(reqBody) => {
 
 /** get player list*/
 const getPlayerList = async() => {
-    return Player.find();
+    return Player.find().populate("sports");
 };
 
 /**get player list by id */

@@ -3,12 +3,14 @@ const express = require('express');
 const { founderValidation } = require('../../validations');
 const { founderController } = require('../../controllers');
 const validate = require('../../middlewares/validate');
+const auth = require('../../middlewares/auth');
 
 const router = express.Router();
 
 /**create founder */
 router.post(
     "/create-founder",
+    auth(),
     validate(founderValidation.createFounder),
     founderController.createFounder
 );
@@ -33,5 +35,12 @@ router.delete(
     validate(founderValidation.getDetails),
     founderController.deleteDetails
 );
+
+/**Send mail */
+router.post(
+    "/send-mail",
+    validate(founderValidation.sendMail),
+    founderController.sendMail
+)
 
 module.exports = router;

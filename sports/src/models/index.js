@@ -6,3 +6,5 @@ module.exports.News = require('./news.model');
 module.exports.Event = require('./event.model');
 module.exports.Result = require('./result.model');
 module.exports.Player = require('./player.model');
+module.exports.Sports = require('./sports.model');
+module.exports.Token = require('./token.model');

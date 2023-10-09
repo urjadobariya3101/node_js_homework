@@ -10,7 +10,7 @@ const createNews = async (req,res) => {
             throw new Error ("Something went wrong, Please try again or later!");
         }
 
-        re.status(200).json({
+        res.status(200).json({
             success : true,
             message : "News create successfully!",
             data : { news }
@@ -33,7 +33,7 @@ const getNewsList = async(req,res) => {
             filter.$or = [];
         }
 
-        const getList = await newsService.getnewsList(filter,options);
+        const getList = await newsService.getNewsList(filter,options);
 
         res.status(200).json({
             success : true,

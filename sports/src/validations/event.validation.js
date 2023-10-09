@@ -6,6 +6,7 @@ const createEvent = {
     event_name: Joi.string().required().trim(),
     event_desc: Joi.string().required().trim(),
     duration: Joi.string().required().trim(),
+    sports : Joi.string().required().trim()
   }),
 };
 

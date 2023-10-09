@@ -4,7 +4,8 @@ const Joi = require('joi');
 const createNews = {
     body : Joi.object().keys({
         news_name : Joi.string().required().trim(),
-        news_desc : Joi.string().required().trim()
+        news_desc : Joi.string().required().trim(),
+        sports : Joi.string().required().trim()
     })
 };
 

@@ -7,7 +7,7 @@ const createEvent = async(reqbody) => {
 
 /**get list of Event */
 const getEventList = async() => {
-    return Event.find();
+    return Event.find().populate("sports");
 }
 
 /**get Event by id*/

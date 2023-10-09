@@ -1,38 +1,42 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+
 
 const founderSchema = new mongoose.Schema(
-    {
-        firstname: {
-            type: String,
-            trim: true
-        },
-        email: {
-            type: String,
-            trim: true
-        },
-        nationality: {
-            type: String,
-            trim: true
-        },
-        sport: {
-            type: String,
-            trim: true
-        },
-        founded_year : {
-            type : Number,
-            trim : true
-        },
-        is_active: {
-            type: Boolean,
-            default: true
-        }
+  {
+    firstname: {
+      type: String,
+      trim: true,
     },
-    {
-        timestamps: true,
-        versionKey: false
-    }
+    email: {
+      type: String,
+      trim: true,
+    },
+    nationality: {
+      type: String,
+      trim: true,
+    },
+    sport: {
+      type: String,
+      trim: true,
+    },
+    founded_year: {
+      type: Number,
+      trim: true,
+    },
+    sports: {
+      type: mongoose.Types.ObjectId,
+      ref: "sports",
+    },
+    is_active: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
-const Founder = mongoose.model('founder', founderSchema);
-
+const Founder = mongoose.model("founder", founderSchema);
 module.exports = Founder;

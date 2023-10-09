@@ -10,6 +10,10 @@ const categorySchema = new mongoose.Schema(
             type : String,
             trim : true
         },
+        sports : {
+            type : mongoose.Types.ObjectId,
+            ref : "sports"
+        },
         is_active : {
             type : Boolean,
             default : true

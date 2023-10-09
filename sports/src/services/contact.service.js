@@ -7,7 +7,7 @@ const createContact = async(reqBody) => {
 
 /**list contact */
 const getContactList = async() => {
-    return Contact.find();
+    return Contact.find().populate("sports");
 };
 
 /**get details contact */

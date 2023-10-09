@@ -7,7 +7,7 @@ const createTeam = async(reqbody) => {
 
 /**get list of Team */
 const getTeamList = async() => {
-    return Team.find();
+    return Team.find().populate("player");
 }
 
 /**get Team by id*/

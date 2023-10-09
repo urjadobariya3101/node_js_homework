@@ -7,7 +7,7 @@ const createFounder = async(reqbody) => {
 
 /**get list of founder */
 const getFounderList = async() => {
-    return Founder.find();
+    return Founder.find().populate("sports");
 }
 
 /**get founder by id*/

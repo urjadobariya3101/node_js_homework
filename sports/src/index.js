@@ -1,11 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-// const cors = require("cors");
+const cors = require("cors");
 const http = require("http");
 const { connectDB } = require("./db/dbConnection");
 const routes = require("./routes/v1");
-const path = require("path")
-// require("./helpers/crons");
+const path = require("path");
+require("./helpers/crons");
 const config = require("../src/config/config");
 
 const app = express();
@@ -24,11 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname,`./public`)))
 
-/** enable cors */
-// app.use(cors());
-// app.options("*", cors());
+/* ------------------------------- enable cors ------------------------------ */
+app.use(cors());
+app.options("*", cors());
 
-/** upload image */
+/* ------------------------------ upload image ------------------------------ */
 // app.use(express.static(`./public`));
 
 app.use("/v1", routes);
@@ -38,10 +38,10 @@ app.use((req, res, next) => {
   next(new Error("Route not found!"));
 });
 
-/** Database connection */
+ /* --------------------------- Database connection -------------------------- */
 connectDB()
 
-/** create server using http */
+/* ------------------------ create server using http ------------------------ */
 const server = http.createServer(app);
 
 server.listen(config.port, () => {

@@ -10,7 +10,7 @@ const createTeam = async (req,res) => {
             throw new Error ("Something went wrong, Please try again or later!");
         }
 
-        re.status(200).json({
+        res.status(200).json({
             success : true,
             message : "Team create successfully!",
             data : { team }

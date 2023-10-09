@@ -7,7 +7,7 @@ const createNews = async(reqbody) => {
 
 /**get list of News */
 const getNewsList = async() => {
-    return News.find();
+    return News.find().populate("sports");
 }
 
 /**get News by id*/

@@ -10,7 +10,7 @@ const createContact = async (req,res) => {
             throw new Error ("Something went wrong, Please try again or later!");
         }
 
-        re.status(200).json({
+        res.status(200).json({
             success : true,
             message : "Contact create successfully!",
             data : { contact }
